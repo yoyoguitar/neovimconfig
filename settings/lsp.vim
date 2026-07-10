@@ -18,7 +18,8 @@ lsp_status.config({
 
 lsp_status.register_progress()
 
-local nvim_lsp = require('lspconfig')
+--local nvim_lsp = require('lspconfig')
+--vim.lsp.config()
 
 local log_to_file = function(logfile)
 	return function(log_value)
@@ -198,7 +199,8 @@ local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 for serverName, config in pairs(servers) do
 	local updatedConfig = vim.tbl_deep_extend('keep', config, defaultConfig)
 	updatedConfig = vim.tbl_deep_extend('keep',cmp_capabilities, updatedConfig)
-	nvim_lsp[serverName].setup(updatedConfig)
+	vim.lsp.config(serverName,updatedConfig)
+	vim.lsp.enable(serverName)
 	--nvim_lsp[serverName].setup(updatedConfig)
 end
 --vim.lsp.set_log_level("debug")
